@@ -96,13 +96,9 @@ void displayBoard(nodeCongklak *board) {
     printf("\n");
 
     // Menampilkan lumbung pemain A
-    printf("Lumbung A: [Lumbung A: %d]\n", board->lumbung->jumlahbiji);
+    printf("Lumbung A: [Jumlah Biji: %d]\n", board->lumbung->jumlahbiji);
 
     // Menampilkan lumbung pemain B
-    nodeLumbung *lumbungB = board->lumbung->berikut;
-    printf("Lumbung B: [Lumbung B: %d]\n", lumbungB->jumlahbiji);
+	nodeLumbung *lumbungB = (nodeLumbung *)board->lumbung;
+	printf("Lumbung B: [Jumlah Biji: %d]\n", lumbungB->jumlahbiji);
 }
-
-
-
-
