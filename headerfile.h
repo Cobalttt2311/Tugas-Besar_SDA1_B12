@@ -1,8 +1,6 @@
 #ifndef HEADERFILE_H
 #define HEADERFILE_H
 
-
-
 typedef struct nodeCongklak {
 	char namaLubang;
 	char pemilikLubang;
@@ -18,6 +16,9 @@ typedef struct nodeLumbung {
 	int jumlahbiji;
 	struct nodeCongklak *berikut;
 } nodeLumbung;
+
+void makeBoard (nodeCongklak *board);
+void displayBoard(nodeCongklak *board);
 
 
 #endif
