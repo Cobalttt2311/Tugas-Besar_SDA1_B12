@@ -43,9 +43,6 @@ int checkEmptySide(nodeCongklak *board, char pemain);
 // Fungsi untuk membatalkan langkah yang telah dilakukan oleh pemain
 void undoMove(nodeCongklak *board);
 
-// Fungsi untuk menentukan langkah yang akan diambil oleh komputer sebagai pemain AI
-void AI_Move(nodeCongklak *board);
-
 // Fungsi untuk menyimpan status permainan ke dalam file eksternal
 void saveGame(nodeCongklak *board, char *filename);
 
