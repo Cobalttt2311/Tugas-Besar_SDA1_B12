@@ -120,28 +120,34 @@ void moveSeed(nodeCongklak *board, char lubangPilih) {
     // Tentukan lumbung pemain
     lumbungPlayer = current->lumbung;
 
+    // Mulai penyebaran biji
     while (jumlahBiji > 0) {
         // Pindah ke lubang berikutnya
         current = current->berikut;
 
-        // Jika mencapai akhir, mulai dari awal
-        if (current == NULL) {
+        // Jika mencapai lumbung lawan, skip
+        if (current == (nodeCongklak *)lumbungPlayer->berikut) {
+            continue;
+        }
+
+        // Tambahkan biji ke lubang berikutnya jika bukan lumbung lawan
+        current->jumlahbiji++;
+        jumlahBiji--;
+
+        // Jika mencapai akhir dan masih ada biji tersisa, mulai dari awal
+        if (current == NULL && jumlahBiji > 0) {
             current = board;
         }
 
-        // Jika mencapai lumbung milik sendiri, tambahkan biji
-        if (current == (nodeCongklak *)lumbungPlayer) {
+        // Jika biji terakhir jatuh di lumbung pemain sendiri, tambahkan biji
+        if (jumlahBiji == 0 && current == (nodeCongklak *)lumbungPlayer) {
             lumbungPlayer->jumlahbiji++;
-            jumlahBiji--;
-        } else if (current != (nodeCongklak *)lumbungPlayer->berikut) {
-            // Tambahkan biji ke lubang berikutnya jika bukan lumbung lawan
-            current->jumlahbiji++;
-            jumlahBiji--;
+            break;
         }
     }
 
     // Jika biji terakhir jatuh di lubang kosong milik pemain sendiri
-    if (current != (nodeCongklak *)lumbungPlayer && current->jumlahbiji == 1 && current->pemilikLubang == lubangPilih) {
+    if (jumlahBiji == 0 && current != (nodeCongklak *)lumbungPlayer && current->jumlahbiji == 1 && current->pemilikLubang == lubangPilih) {
         if (current->seberang != NULL) {
             // Ambil semua biji dari lubang seberang dan tambahkan ke lumbung
             nodeCongklak *seberang = current->seberang;
