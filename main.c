@@ -27,18 +27,18 @@ int main() {
         printf("=========================================\n");
         printf("Masukan Pilihan Anda (1-4) :\n");
         scanf("%d", &pil);
-        getchar(); // Clear the newline character from the input buffer
+        getchar(); 
 
         switch (pil) {
             case 1:
                 system("cls");
                 printf("Masukkan Username Player1 : ");
                 fgets(player1, sizeof(player1), stdin);
-                strtok(player1, "\n"); // Remove newline character from the end of string
+                strtok(player1, "\n"); 
 
-                printf("Masukkan Username Player2: ");
+                printf("Masukkan Username Player2 : ");
                 fgets(player2, sizeof(player2), stdin);
-                strtok(player2, "\n"); // Remove newline character from the end of string
+                strtok(player2, "\n"); 
 
                 currentPlayer = player1;
                 system("cls");
@@ -51,7 +51,7 @@ int main() {
                     displayBoard(board);
                     printf("%s, pilih lubang (A-N) atau X untuk keluar: ", currentPlayer);
                     scanf(" %c", &choice);
-                    choice = toupper(choice); // Convert to uppercase to make it case insensitive
+                    choice = toupper(choice); 
 
                     if (choice == 'X') {
                         printf("Permainan berakhir. Terima kasih telah bermain!\n");
@@ -83,14 +83,25 @@ int main() {
                 printf("Masih dalam pengembangan\n");
                 break;
 
-            case 3:
-                system("cls");
-                printf("Masih dalam pengembangan\n");
-                break;
+			case 3:
+			    system("cls");
+			    FILE *tutorialFile;
+			    tutorialFile = fopen("tutorial.txt", "r");
+			
+			    if (tutorialFile == NULL) {
+			        printf("File tutorial tidak dapat dibuka.\n");
+			    } else {
+			        printf("Tutorial:\n");
+			        char line[256];
+			        while (fgets(line, sizeof(line), tutorialFile) != NULL) {
+			            printf("%s", line);
+			        }
+			        fclose(tutorialFile);
+			    }
+			    break;
 
             case 4:
                 printf("Keluar dari permainan....\n");
-                // No need to free the static array
                 return 0;
 
             default:
