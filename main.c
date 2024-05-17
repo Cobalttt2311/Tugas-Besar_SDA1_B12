@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
+#include <ctype.h>
 #include "headerfile.h"
 
 int main() {
@@ -7,9 +9,13 @@ int main() {
     nodeCongklak board[14];
     char pilihan;
     int boardInitialized = 0;
+    char player1[50], player2[50];
+    char *currentPlayer;
+    char choice;
+    bool game_over = false;
 
     while (1) {
-        system("cls"); // Clear the console screen
+        system("cls");
         printf("=========================================\n");
         printf("|           GAME CONGKLAK               |\n");
         printf("|---------------------------------------|\n");
@@ -21,25 +27,54 @@ int main() {
         printf("=========================================\n");
         printf("Masukan Pilihan Anda (1-4) :\n");
         scanf("%d", &pil);
+        getchar(); // Clear the newline character from the input buffer
 
         switch (pil) {
             case 1:
+                system("cls");
+                printf("Masukkan Username Player1 : ");
+                fgets(player1, sizeof(player1), stdin);
+                strtok(player1, "\n"); // Remove newline character from the end of string
+
+                printf("Masukkan Username Player2: ");
+                fgets(player2, sizeof(player2), stdin);
+                strtok(player2, "\n"); // Remove newline character from the end of string
+
+                currentPlayer = player1;
                 system("cls");
                 if (!boardInitialized) {
                     makeBoard(board);
                     boardInitialized = 1;
                 }
-                
-                while (1) {
-                    displayBoard(board);
-                    printf("Pilih lubang (A-N) atau X untuk keluar: ");
-                    scanf(" %c", &pilihan);
 
-                    if (pilihan == 'X' || pilihan == 'x') {
-                        break;
+                while (!game_over) {
+                    displayBoard(board);
+                    printf("%s, pilih lubang (A-N) atau X untuk keluar: ", currentPlayer);
+                    scanf(" %c", &choice);
+                    choice = toupper(choice); // Convert to uppercase to make it case insensitive
+
+                    if (choice == 'X') {
+                        printf("Permainan berakhir. Terima kasih telah bermain!\n");
+                        game_over = true;
+                    } else if (choice < 'A' || choice > 'N') {
+                        system("cls");
+                        printf("Karakter tidak valid. Pilih lubang (A-N).\n");
+                    } else if (isValidMove(board, choice, currentPlayer == player1 ? 'A' : 'B')) {
+                        moveSeed(board, choice, currentPlayer == player1 ? 'A' : 'B');
+                        currentPlayer = (currentPlayer == player1) ? player2 : player1;
+                        system("cls");
+
+                        if (checkEmptySide(board, currentPlayer == player1 ? 'A' : 'B')) {
+                            printf("Sisi %s kosong. Permainan Berakhir\n", currentPlayer);
+                            game_over = true;
+                        }
+                    } else {
+                        system("cls");
+                        printf("Langkah tidak valid, coba lagi.\n");
                     }
 
-                    moveSeed(board, pilihan);
+                    // Tambahkan kondisi untuk memeriksa pemenang atau akhir permainan
+                    // ...
                 }
                 break;
 
@@ -47,7 +82,7 @@ int main() {
                 system("cls");
                 printf("Masih dalam pengembangan\n");
                 break;
-                
+
             case 3:
                 system("cls");
                 printf("Masih dalam pengembangan\n");
@@ -63,8 +98,7 @@ int main() {
                 break;
         }
         printf("Press any key to continue...\n");
-        getchar(); 
-        getchar(); 
+        getchar();
     }
 
     return 0;
