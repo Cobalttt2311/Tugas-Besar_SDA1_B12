@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "congklak.h"
+#include "headerfile.h"
 
 // Fungsi untuk menginisialisasi papan permainan congklak
 void makeBoard(nodeCongklak *board) {
@@ -66,34 +66,48 @@ void makeBoard(nodeCongklak *board) {
     
 }
 
-// Fungsi untuk menampilkan papan permainan congklak
 void displayBoard(nodeCongklak *board) {
     int i;
 
     printf("Papan Permainan Congklak:\n");
-
-    // Menampilkan lubang-lubang untuk pemain A
-    printf("Pemain A: ");
+    
+    
+    printf("=======\n");
+    printf("|LA :%d|\n", board[6].lumbung->jumlahbiji);
+    printf("=======\n");
     for (i = 0; i < 7; i++) {
-        printf("[%c: %d] ", board[i].namaLubang, board[i].jumlahbiji);
+        printf("======");
+    }
+    printf("\n");
+    for (i = 0; i < 7; i++) {
+        printf("|%c: %d|", board[i].namaLubang, board[i].jumlahbiji);
+    }
+    printf("\n");
+    for (i = 0; i < 7; i++) {
+        printf("======");
     }
     printf("\n");
 
-    // Menampilkan lubang-lubang untuk pemain B
-    printf("Pemain B: ");
-    for (i = 7; i < 14; i++) {
-        printf("[%c: %d] ", board[i].namaLubang, board[i].jumlahbiji);
+    for (i = 13; i >= 7; i--) { // Mulai dari indeks 13 dan hingga indeks 7
+        printf("======");
     }
     printf("\n");
-
-    // Menampilkan lumbung pemain A
-    printf("Lumbung A: [Jumlah Biji: %d]\n", board[6].lumbung->jumlahbiji);
+    for (i = 13; i >= 7; i--) {
+        printf("|%c: %d|", board[i].namaLubang, board[i].jumlahbiji);
+    }
+    printf("\n");
+    for (i = 13; i >= 7; i--) {
+        printf("======");
+    }
+    printf("\n");
 
     // Menampilkan lumbung pemain B
-    printf("Lumbung B: [Jumlah Biji: %d]\n", ((nodeLumbung *)board[13].lumbung)->jumlahbiji);
+    printf("=======\n");
+    printf("|LB :%d|\n", ((nodeLumbung *)board[13].lumbung)->jumlahbiji);
+    printf("=======\n");
 }
 
-void moveSeed(nodeCongklak *board, char lubangPilih) {
+void moveSeed(nodeCongklak *board, char lubangPilih, char player) {
     nodeCongklak *current = board;
     nodeLumbung *lumbungPlayer = NULL;
     int jumlahBiji;
@@ -125,8 +139,13 @@ void moveSeed(nodeCongklak *board, char lubangPilih) {
         // Pindah ke lubang berikutnya
         current = current->berikut;
 
+        // Jika mencapai akhir, kembali ke awal
+        if (current == NULL) {
+            current = board;
+        }
+
         // Jika mencapai lumbung lawan, skip
-        if (current == (nodeCongklak *)lumbungPlayer->berikut) {
+        if (current == (nodeCongklak *)lumbungPlayer->berikut && lumbungPlayer->pemilikLumbung != player) {
             continue;
         }
 
@@ -134,28 +153,102 @@ void moveSeed(nodeCongklak *board, char lubangPilih) {
         current->jumlahbiji++;
         jumlahBiji--;
 
-        // Jika mencapai akhir dan masih ada biji tersisa, mulai dari awal
-        if (current == NULL && jumlahBiji > 0) {
-            current = board;
-        }
-
-        // Jika biji terakhir jatuh di lumbung pemain sendiri, tambahkan biji
+        // Jika biji terakhir jatuh di lumbung pemain sendiri
         if (jumlahBiji == 0 && current == (nodeCongklak *)lumbungPlayer) {
-            lumbungPlayer->jumlahbiji++;
             break;
         }
     }
 
     // Jika biji terakhir jatuh di lubang kosong milik pemain sendiri
-    if (jumlahBiji == 0 && current != (nodeCongklak *)lumbungPlayer && current->jumlahbiji == 1 && current->pemilikLubang == lubangPilih) {
+    if (jumlahBiji == 0 && current != (nodeCongklak *)lumbungPlayer && current->jumlahbiji == 1 && current->pemilikLubang == player) {
         if (current->seberang != NULL) {
             // Ambil semua biji dari lubang seberang dan tambahkan ke lumbung
             nodeCongklak *seberang = current->seberang;
-            lumbungPlayer->jumlahbiji += seberang->jumlahbiji;
+            lumbungPlayer->jumlahbiji += seberang->jumlahbiji + current->jumlahbiji;
             seberang->jumlahbiji = 0;
+            current->jumlahbiji = 0;
         }
     }
 }
+
+
+// Fungsi untuk memeriksa apakah langkah yang dipilih oleh pemain adalah langkah yang valid
+int isValidMove(nodeCongklak *board, char lubang, char player) {
+    nodeCongklak *current = board;
+
+    // Cari lubang yang dipilih
+    while (current != NULL && current->namaLubang != lubang) {
+        current = current->berikut;
+    }
+
+    // Jika lubang tidak ditemukan, langkah tidak valid
+    if (current == NULL) {
+        return 0;
+    }
+
+    // Periksa apakah lubang milik pemain yang sedang bermain
+    if (current->pemilikLubang != player) {
+        return 0;
+    }
+
+    // Periksa apakah lubang tidak kosong
+    if (current->jumlahbiji == 0) {
+        return 0;
+    }
+
+    // Jika semua kondisi di atas terpenuhi, langkah valid
+    return 1;
+}
+
+int checkEmptySide(nodeCongklak *board, char player){
+	int i;
+	int startIndex = (player == 'A') ? 0 : 7;
+	int endIndex = (player == 'A') ? 6 : 13;
+	
+	for ( i = startIndex; i <= endIndex; i++){
+		if (board[i].jumlahbiji > 0){
+			return 0;
+		}
+	}
+	
+	return 1;
+}
+
+// Belum ditaro dimananya
+void captureSeeds(nodeCongklak *board, char lubang) {
+    int index;
+    char player = board[lubang - 'A'].pemilikLubang; // Mendapatkan pemilik lubang
+
+    // Mengambil indeks lubang
+    if (player == 'A') {
+        index = lubang - 'A';
+    } else {
+        index = 'N' - lubang;
+    }
+
+    int oppositeIndex = 12 - index; // Indeks lubang seberang
+
+    // Menangkap biji-biji lawan
+    if (board[index].jumlahbiji == 1 && board[oppositeIndex].jumlahbiji > 0) {
+        // Jika lubang terakhir berisi satu biji dan lubang seberang tidak kosong
+        nodeCongklak *current = &board[oppositeIndex];
+        int capturedSeeds = current->jumlahbiji;
+
+        // Menambahkan biji-biji lawan ke lumbung pemain yang sedang giliran
+        if (player == 'A') {
+            board[6].lumbung->jumlahbiji += capturedSeeds;
+        } else {
+            board[13].lumbung->jumlahbiji += capturedSeeds;
+        }
+
+        // Mengosongkan lubang seberang
+        current->jumlahbiji = 0;
+    }
+}
+
+
+
+
 
 
 
