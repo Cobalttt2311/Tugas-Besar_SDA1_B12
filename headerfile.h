@@ -1,53 +1,50 @@
 #ifndef HEADERFILE_H
 #define HEADERFILE_H
 
-// Struktur data untuk lubang dalam permainan congklak
-typedef struct nodeCongklak {
-    char namaLubang;               // Nama lubang
-    char pemilikLubang;            // Pemain yang memiliki lubang ('A' atau 'B')
-    int jumlahbiji;                // Jumlah biji di dalam lubang
-    struct nodeCongklak *berikut;  // Pointer ke lubang berikutnya
-    struct nodeCongklak *seberang; // Pointer ke lubang seberang
-    struct nodeLumbung *lumbung;   // Pointer ke lumbung yang terhubung
-} nodeCongklak;
-
-// Struktur data untuk lumbung dalam permainan congklak
 typedef struct nodeLumbung {
-    char namaLumbung;               // Nama lumbung
-    char pemilikLumbung;           // Pemain yang memiliki lumbung ('A' atau 'B')
-    int jumlahbiji;                // Jumlah biji di dalam lumbung
-    struct nodeCongklak *berikut;  // Pointer ke lumbung berikutnya
+    char namaLumbung;
+    char pemilikLumbung;
+    int jumlahbiji;
+    struct nodeCongklak *berikut;
 } nodeLumbung;
 
-// Fungsi untuk menginisialisasi papan permainan congklak
+typedef struct nodeCongklak {
+    char namaLubang;
+    char pemilikLubang;
+    int jumlahbiji;
+    struct nodeCongklak *berikut;
+    struct nodeCongklak *seberang;
+    nodeLumbung *lumbung;
+} nodeCongklak;
+
+// Fungsi untuk membuat papan congklak ( alokasi memori buat congklak )
 void makeBoard(nodeCongklak *board);
 
-// Fungsi untuk menampilkan papan permainan congklak
-void displayBoard(nodeCongklak *board);
+// Fungsi buat nampilin display congklak
+void displayBoard(nodeCongklak *board, char play1[], char play2[]);
 
-// Fungsi untuk memindahkan biji dari lubang yang dipilih oleh pemain
-void moveSeed(nodeCongklak *board, char lubang);
+// Fungsi untuk menggerakan Biji
+void moveSeed(nodeCongklak *board, char lubangPilih, char player);
 
-// Fungsi untuk memeriksa apakah terdapat pemenang dalam permainan congklak
-int checkWinner(nodeCongklak *board);
+// Fungsi untuk memeriksa pergerakan biji , apakah benar atau tidak
+int isValidMove(nodeCongklak *board, char lubang, char player);
 
-// Fungsi untuk memeriksa apakah langkah yang dipilih oleh pemain adalah langkah yang valid
-int isValidMove(nodeCongklak *board, char lubang);
+// Fungsi untuk memeriksa sisi yang kosong
+int checkEmptySide(nodeCongklak *board, char player);
 
 // Fungsi untuk menangkap biji-biji lawan setelah pemain mengakhiri gilirannya di lubang yang berisi satu biji
 void captureSeeds(nodeCongklak *board, char lubang);
 
-// Fungsi untuk memeriksa apakah sisi pemain (A atau B) sudah kosong atau tidak memiliki biji
-int checkEmptySide(nodeCongklak *board, char pemain);
+// Fungsi untuk memeriksa apakah terdapat pemenang dalam permainan congklak
+int checkWinner(nodeCongklak *board);
 
-// Fungsi untuk membatalkan langkah yang telah dilakukan oleh pemain
-void undoMove(nodeCongklak *board);
+//-----------------------------------------------------------------------------------------------------------------------------------------
 
 // Fungsi untuk menyimpan status permainan ke dalam file eksternal
-void saveGame(nodeCongklak *board, char *filename);
+void saveGame(nodeCongklak *board, const char *filename);
 
 // Fungsi untuk memuat status permainan dari file eksternal
-void loadGame(nodeCongklak *board, char *filename);
+void loadGame(nodeCongklak *board, const char *filename);
 
 // Fungsi untuk menampilkan petunjuk cara bermain congklak ke layar
 void displayInstructions();
@@ -55,4 +52,4 @@ void displayInstructions();
 // Fungsi untuk menampilkan menu permainan congklak ke layar
 void displayMenu();
 
-#endif
+#endif // HEADERFILE_H
