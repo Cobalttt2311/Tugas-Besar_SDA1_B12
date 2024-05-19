@@ -48,7 +48,7 @@ int main() {
                 }
 
                 while (!game_over) {
-                    displayBoard(board);
+                    displayBoard(board, player1, player2);
                     printf("%s, pilih lubang (A-N) atau X untuk keluar: ", currentPlayer);
                     scanf(" %c", &choice);
                     choice = toupper(choice); 
@@ -83,22 +83,22 @@ int main() {
                 printf("Masih dalam pengembangan\n");
                 break;
 
-			case 3:
-			    system("cls");
-			    FILE *tutorialFile;
-			    tutorialFile = fopen("tutorial.txt", "r");
-			
-			    if (tutorialFile == NULL) {
-			        printf("File tutorial tidak dapat dibuka.\n");
-			    } else {
-			        printf("Tutorial:\n");
-			        char line[256];
-			        while (fgets(line, sizeof(line), tutorialFile) != NULL) {
-			            printf("%s", line);
-			        }
-			        fclose(tutorialFile);
-			    }
-			    break;
+            case 3:
+                system("cls");
+                FILE *tutorialFile;
+                tutorialFile = fopen("tutorial.txt", "r");
+
+                if (tutorialFile == NULL) {
+                    printf("File tutorial tidak dapat dibuka.\n");
+                } else {
+                    printf("Tutorial:\n");
+                    char line[256];
+                    while (fgets(line, sizeof(line), tutorialFile) != NULL) {
+                        printf("%s", line);
+                    }
+                    fclose(tutorialFile);
+                }
+                break;
 
             case 4:
                 printf("Keluar dari permainan....\n");
