@@ -33,10 +33,17 @@ int isValidMove(nodeCongklak *board, char lubang, char player);
 int checkEmptySide(nodeCongklak *board, char player);
 
 // Fungsi untuk menangkap biji-biji lawan setelah pemain mengakhiri gilirannya di lubang yang berisi satu biji
-void captureSeeds(nodeCongklak *board, char lubang);
+//void captureSeeds(nodeCongklak *board, char lubang);
 
 // Fungsi untuk memeriksa apakah terdapat pemenang dalam permainan congklak
 int checkWinner(nodeCongklak *board);
+
+//Inisialisasi nama pemilik lumbung
+void initializeLumbung(nodeLumbung *lumbung, char pemilik);
+
+void saveScore(const char *filename, const char *winner);
+
+void displayScores(const char *filename);
 
 //-----------------------------------------------------------------------------------------------------------------------------------------
 
