@@ -1,3 +1,4 @@
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
@@ -81,7 +82,9 @@ int main() {
                         int winner = checkWinner(board);
                         if (winner) {
                             system("cls");
-                            printf("Pemenang adalah %s!\n", winner == 1 ? player1 : player2);
+                            const char *winnerName = winner == 1 ? player1 : player2;
+                            printf("Pemenang adalah %s!\n", winnerName);
+                            saveScore("skor.txt", winnerName);
                             printf("Press any key to continue...\n");
                             getchar();
                             game_over = true;
@@ -95,7 +98,7 @@ int main() {
 
             case 2:
                 system("cls");
-                printf("Masih dalam pengembangan\n");
+                displayScores("skor.txt");
                 break;
 
             case 3:
