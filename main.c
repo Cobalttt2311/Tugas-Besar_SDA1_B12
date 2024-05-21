@@ -1,4 +1,3 @@
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
@@ -22,10 +21,10 @@ int main() {
         printf("=========================================\n");
         printf("|           GAME CONGKLAK               |\n");
         printf("|---------------------------------------|\n");
-        printf("|1. Mulai Permainan                     |\n");
-        printf("|2. Tampilkan Skor                      |\n");
-        printf("|3. Cara Bermain                        |\n");
-        printf("|4. Keluar Permainan                    |\n");
+        printf("|1. Start Game                          |\n");
+        printf("|2. Show Score                          |\n");
+        printf("|3. How to play                         |\n");
+        printf("|4. Exit                                |\n");
         printf("|                                       |\n");
         printf("=========================================\n");
         printf("Masukan Pilihan Anda (1-4) :\n");
