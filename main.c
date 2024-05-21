@@ -87,7 +87,7 @@ int main() {
                             printf("\n");
                             printf("\n");
                             printf("\n");
-                            printf("YOU'LL NEVER WALK ALONE %s \n", player2);
+                            printf("YOU'LL NEVER WALK ALONE\n);
                             printf("GLORY GLORY THE CHAMPHIONS!!\n");
                             saveScore("skor.txt", winnerName);
                             getchar();
