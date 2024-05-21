@@ -13,7 +13,7 @@ void makeBoard(nodeCongklak *board) {
     for (i = 0; i < 7; i++) {
         current[i].namaLubang = 'A' + i;
         current[i].pemilikLubang = 'A';
-        current[i].jumlahbiji = 4; // Misalnya, awalnya setiap lubang memiliki 7 biji
+        current[i].jumlahbiji = 7; // Misalnya, awalnya setiap lubang memiliki 7 biji
         current[i].berikut = &current[i + 1];
         current[i].seberang = NULL;
         current[i].lumbung = NULL;
@@ -23,7 +23,7 @@ void makeBoard(nodeCongklak *board) {
     for (i = 7; i < 14; i++) {
         current[i].namaLubang = 'H' + (i - 7);
         current[i].pemilikLubang = 'B';
-        current[i].jumlahbiji = 4; // Misalnya, awalnya setiap lubang memiliki 7 biji
+        current[i].jumlahbiji = 7; // Misalnya, awalnya setiap lubang memiliki 7 biji
         if (i < 13) {
             current[i].berikut = &current[i + 1];
         } else {
@@ -116,14 +116,17 @@ void displayBoard(nodeCongklak *board, char play1[], char play2[]) {
 
 void moveSeed(nodeCongklak *board, char lubangPilih, char player) {
     nodeCongklak *current = board;
-    nodeLumbung **lumbungPlayer; // Gunakan pointer ke pointer lumbung
+    nodeLumbung *lumbungPlayer;
+    nodeLumbung *lumbungLawan; // Penunjuk ke lumbung lawan
     int jumlahBiji;
 
-    // Tentukan lumbung pemain
+    // Tentukan lumbung pemain dan lumbung lawan
     if (player == 'A') {
-        lumbungPlayer = &board[6].lumbung; // Lumbung pemain A
+        lumbungPlayer = board[6].lumbung; // Lumbung pemain A
+        lumbungLawan = board[13].lumbung; // Lumbung pemain B
     } else {
-        lumbungPlayer = &board[13].lumbung; // Lumbung pemain B
+        lumbungPlayer = board[13].lumbung; // Lumbung pemain B
+        lumbungLawan = board[6].lumbung; // Lumbung pemain A
     }
 
     // Cari lubang yang dipilih
@@ -151,11 +154,8 @@ void moveSeed(nodeCongklak *board, char lubangPilih, char player) {
         current = current->berikut;
 
         // Jika mencapai lumbung lawan, lewati
-        if (current == (nodeCongklak *)*lumbungPlayer && (*lumbungPlayer)->pemilikLumbung != player) {
-            *lumbungPlayer = (*lumbungPlayer)->berikut; // Pindah ke lumbung berikutnya yang dimiliki pemain
-            current->jumlahbiji++; // Tambahkan biji ke lubang berikutnya
-            jumlahBiji--; // Kurangi jumlah biji yang tersisa
-            continue; // Lewati proses penambahan biji di lubang lawan
+        if ((nodeCongklak *)current == (nodeCongklak *)lumbungLawan) {
+            continue; // Lewati proses penambahan biji di lumbung lawan
         }
 
         // Tambahkan biji ke lubang berikutnya
@@ -163,17 +163,17 @@ void moveSeed(nodeCongklak *board, char lubangPilih, char player) {
         jumlahBiji--;
 
         // Jika biji terakhir jatuh di lumbung pemain sendiri
-        if (jumlahBiji == 0 && current == (nodeCongklak *)*lumbungPlayer) {
+        if (jumlahBiji == 0 && current == (nodeCongklak *)lumbungPlayer) {
             break;
         }
     }
 
     // Jika biji terakhir jatuh di lubang kosong milik pemain sendiri
-    if (jumlahBiji == 0 && current != (nodeCongklak *)*lumbungPlayer && current->jumlahbiji == 1 && current->pemilikLubang == player) {
+    if (jumlahBiji == 0 && current != (nodeCongklak *)lumbungPlayer && current->jumlahbiji == 1 && current->pemilikLubang == player) {
         if (current->seberang != NULL) {
             // Ambil semua biji dari lubang seberang dan tambahkan ke lumbung
             nodeCongklak *seberang = current->seberang;
-            (*lumbungPlayer)->jumlahbiji += seberang->jumlahbiji + current->jumlahbiji;
+            lumbungPlayer->jumlahbiji += seberang->jumlahbiji + current->jumlahbiji;
             seberang->jumlahbiji = 0;
             current->jumlahbiji = 0;
         }
@@ -320,7 +320,6 @@ void displayScores(const char *filename) {
         printf("%s: Pemain tidak ada\n", player2);
     }
 }
-
 
 void saveScore(const char *filename, const char *winner) {
     FILE *file = fopen(filename, "a");
