@@ -8,16 +8,17 @@
 2. **Papan Permainan:**
    - Papan Congklak terdiri dari 14 lubang kecil dan 2 lubang besar yang disebut lumbung.
    - Setiap pemain memiliki 7 lubang kecil dan 1 lumbung.
-   - Lubang kecil diisi dengan biji (biasanya 4 biji per lubang).
+   - Lubang kecil diisi dengan 4 biji perlubang.
 
 3. **Cara Bermain:**
    - Pemain secara bergiliran memilih satu lubang di sisi mereka dan mengambil semua biji dari lubang tersebut.
-   - Biji-biji tersebut kemudian disebarkan satu per satu ke lubang-lubang berikutnya berlawanan arah jarum jam.
+   - Biji-biji tersebut kemudian disebarkan satu per satu ke lubang-lubang berikutnya searah jarum jam.
    - Jika biji terakhir jatuh di lubang yang kosong milik pemain sendiri, pemain tersebut mengambil semua biji dari lubang seberang dan memasukkannya ke lumbung.
    - Jika biji terakhir jatuh di lumbung milik sendiri, pemain mendapatkan giliran lagi.
 
 4. **Aturan Tambahan:**
    - Jika biji terakhir jatuh di lubang yang sudah berisi biji, pemain mengambil semua biji dari lubang tersebut dan melanjutkan penyebaran.
+   - Jika biji terakhir jatuh di lubang sendiri yang kosong kemudian lubang seberang nya kosong, pemain mengambil biji terakhir yang jatuh di lubang kosong tadi dan memasukannya ke lumbung.
    - Jika biji terakhir jatuh di lubang lawan, giliran berpindah ke pemain berikutnya.
    - Permainan berakhir jika semua lubang kecil di satu sisi kosong. Pemain yang masih memiliki biji di sisi mereka harus memasukkannya ke lumbung mereka.
 
