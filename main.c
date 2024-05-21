@@ -82,9 +82,14 @@ int main() {
                         if (winner) {
                             system("cls");
                             const char *winnerName = winner == 1 ? player1 : player2;
+                            printf("CONGRATULATIONS\n");
                             printf("Pemenang adalah %s!\n", winnerName);
+                            printf("\n");
+                            printf("\n");
+                            printf("\n");
+                            printf("YOU'LL NEVER WALK ALONE %s \n", player2);
+                            printf("GLORY GLORY THE CHAMPHIONS!!\n");
                             saveScore("skor.txt", winnerName);
-                            printf("Press any key to continue...\n");
                             getchar();
                             game_over = true;
                         }
