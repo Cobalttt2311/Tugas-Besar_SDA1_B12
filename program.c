@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include <string.h>
 #include "headerfile.h"
 
 void makeBoard(nodeCongklak *board) {
@@ -168,16 +169,20 @@ void moveSeed(nodeCongklak *board, char lubangPilih, char player) {
         }
     }
 
-    // Jika biji terakhir jatuh di lubang kosong milik pemain sendiri
-    if (jumlahBiji == 0 && current != (nodeCongklak *)lumbungPlayer && current->jumlahbiji == 1 && current->pemilikLubang == player) {
-        if (current->seberang != NULL) {
-            // Ambil semua biji dari lubang seberang dan tambahkan ke lumbung
-            nodeCongklak *seberang = current->seberang;
-            lumbungPlayer->jumlahbiji += seberang->jumlahbiji + current->jumlahbiji;
-            seberang->jumlahbiji = 0;
-            current->jumlahbiji = 0;
-        }
-    }
+	if (jumlahBiji == 0 && current != (nodeCongklak *)lumbungPlayer && current->jumlahbiji == 1 && current->pemilikLubang == player) {
+	    if (current->seberang != NULL) {
+	        // Cek apakah lubang seberang kosong
+	        nodeCongklak *seberang = current->seberang;
+	        if (seberang->jumlahbiji > 0) {
+	            // Ambil semua biji dari lubang seberang dan tambahkan ke lumbung
+	            lumbungPlayer->jumlahbiji += seberang->jumlahbiji + current->jumlahbiji;
+	            seberang->jumlahbiji = 0;
+	            current->jumlahbiji = 0;
+	        } else {
+	            // Lubang seberang kosong, lanjut main tanpa mengambil biji
+	        }
+	    }
+	}
 }
 
 int isValidMove(nodeCongklak *board, char lubang, char player) {
