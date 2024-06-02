@@ -2,28 +2,35 @@
          ATURAN MAIN CONGKLAK
 ======================================
 
-1. **Tujuan Permainan:**
-   - Permainan Congklak dimainkan oleh dua pemain. Tujuannya adalah untuk mengumpulkan sebanyak mungkin biji ke dalam lumbung milik masing-masing pemain.
+1. Tujuan Permainan:
+   - Pemain harus mengumpulkan sebanyak mungkin biji di lumbungnya sendiri.
+   - Permainan berakhir saat salah satu pemain tidak memiliki biji di lubang-lubangnya.
 
-2. **Papan Permainan:**
-   - Papan Congklak terdiri dari 14 lubang kecil dan 2 lubang besar yang disebut lumbung.
-   - Setiap pemain memiliki 7 lubang kecil dan 1 lumbung.
-   - Lubang kecil diisi dengan 4 biji perlubang.
+2. Papan Permainan:
+   - Papan permainan terdiri dari 14 lubang, dibagi menjadi 2 baris untuk setiap pemain.
+   - Setiap pemain memiliki 7 lubang dan 1 lumbung.
+   - Lubang-lubang diberi label dengan huruf A-N, dimulai dari lubang paling kiri (lubang A) hingga lubang paling kanan (lubang N).
+   - Lubang-lubang pemain A diberi label A-G, sedangkan lubang-lubang pemain B diberi label H-N.
+   - Lumbung pemain A berada di sebelah kiri, sedangkan lumbung pemain B berada di sebelah kanan.
 
-3. **Cara Bermain:**
-   - Pemain secara bergiliran memilih satu lubang di sisi mereka dan mengambil semua biji dari lubang tersebut.
-   - Biji-biji tersebut kemudian disebarkan satu per satu ke lubang-lubang berikutnya searah jarum jam.
-   - Jika biji terakhir jatuh di lubang yang kosong milik pemain sendiri, pemain tersebut mengambil semua biji dari lubang seberang dan memasukkannya ke lumbung.
-   - Jika biji terakhir jatuh di lumbung milik sendiri, pemain mendapatkan giliran lagi.
+3. Persiapan Permainan:
+   - Setiap lubang awalnya diisi dengan 7 biji.
+   - Lumbung awalnya kosong.
 
-4. **Aturan Tambahan:**
-   - Jika biji terakhir jatuh di lubang yang sudah berisi biji, pemain mengambil semua biji dari lubang tersebut dan melanjutkan penyebaran.
-   - Jika biji terakhir jatuh di lubang sendiri yang kosong kemudian lubang seberang nya kosong, pemain mengambil biji terakhir yang jatuh di lubang kosong tadi dan memasukannya ke lumbung.
-   - Jika biji terakhir jatuh di lubang lawan, giliran berpindah ke pemain berikutnya.
-   - Permainan berakhir jika semua lubang kecil di satu sisi kosong. Pemain yang masih memiliki biji di sisi mereka harus memasukkannya ke lumbung mereka.
+4. Langkah dalam Permainan:
+   - Pemain A memulai permainan.
+   - Pemain memilih sebuah lubang yang berisi biji untuk diambil.
+   - Pemain menyebar biji secara berurutan ke lubang-lubang berikutnya, searah jarum jam, termasuk lumbung pemain sendiri, tetapi tidak    termasuk lumbung lawan.
+   - Jika biji terakhir jatuh di lumbung pemain sendiri yang masih kosong, pemain mengambil biji tersebut dan biji seberangnya (jika ada) ke lumbungnya.
+   - Jika biji terakhir jatuh di lumbung pemain sendiri yang sudah terisi, pemain mendapat giliran tambahan.
+   - Jika biji terakhir jatuh di lumbung lawan yang masih kosong, pemain tidak mendapatkan biji tersebut.
+   - Jika biji terakhir jatuh di lumbung lawan yang sudah terisi, pemain mengambil biji tersebut dan biji seberangnya (jika ada) ke lumbungnya.
+   - Jika salah satu pemain tidak memiliki biji di lubang-lubangnya, pemain tersebut kehilangan giliran untuk memainkan biji.
 
-5. **Menentukan Pemenang:**
-   - Pemenang ditentukan dengan menghitung jumlah biji di lumbung masing-masing pemain.
-   - Pemain dengan biji terbanyak di lumbung mereka dinyatakan sebagai pemenang.
+5. Penentuan Pemenang:
+   - Permainan berakhir saat salah satu pemain tidak memiliki biji di lubang-lubangnya.
+   - Pemenang ditentukan berdasarkan jumlah biji di lumbung masing-masing pemain.
+   - Pemain dengan jumlah biji yang lebih banyak di lumbungnya adalah pemenangnya.
 
 Selamat bermain Congklak!
+GLORY GLORY CONGKLAK
