@@ -14,7 +14,7 @@ void makeBoard(nodeCongklak *board) {
     for (i = 0; i < 7; i++) {
         current[i].namaLubang = 'A' + i;
         current[i].pemilikLubang = 'A';
-        current[i].jumlahbiji = 7; // Misalnya, awalnya setiap lubang memiliki 7 biji
+        current[i].jumlahbiji = 4; // Misalnya, awalnya setiap lubang memiliki 7 biji
         current[i].berikut = &current[i + 1];
         current[i].seberang = NULL;
         current[i].lumbung = NULL;
@@ -24,7 +24,7 @@ void makeBoard(nodeCongklak *board) {
     for (i = 7; i < 14; i++) {
         current[i].namaLubang = 'H' + (i - 7);
         current[i].pemilikLubang = 'B';
-        current[i].jumlahbiji = 7; // Misalnya, awalnya setiap lubang memiliki 7 biji
+        current[i].jumlahbiji = 4; // Misalnya, awalnya setiap lubang memiliki 7 biji
         if (i < 13) {
             current[i].berikut = &current[i + 1];
         } else {
@@ -86,6 +86,7 @@ void displayBoard(nodeCongklak *board, char play1[], char play2[]) {
         printf("======");
     }
     printf("\n");
+    
     for (i = 0; i < 7; i++) {
         printf("|%c: %d|", board[i].namaLubang, board[i].jumlahbiji);
     }
@@ -226,35 +227,6 @@ int checkEmptySide(nodeCongklak *board, char player){
     return 1;
 }
 
-//void captureSeeds(nodeCongklak *board, char lubang) {
-//    int index = lubang - 'A'; // Hitung indeks lubang yang dipilih
-//    char player = board[index].pemilikLubang; // Mendapatkan pemilik lubang
-//    int oppositeIndex = 12 - index; // Hitung indeks lubang seberang
-//
-//    // Jika lubang yang dipilih milik pemain A, maka seberangnya milik pemain B
-//    // Jika lubang yang dipilih milik pemain B, maka seberangnya milik pemain A
-//    char oppositePlayer = (player == 'A') ? 'B' : 'A';
-//
-//    // Menangkap biji-biji lawan
-//    if (board[index].jumlahbiji == 1 && board[oppositeIndex].jumlahbiji > 0) {
-//        // Jika lubang terakhir berisi satu biji dan lubang seberang tidak kosong
-//        int capturedSeeds = board[oppositeIndex].jumlahbiji; // Ambil jumlah biji di lubang seberang
-//
-//        // Menambahkan biji-biji lawan ke lumbung pemain yang sedang giliran
-//        if (player == 'A') {
-//            board[6].jumlahbiji += capturedSeeds;
-//        } else {
-//            board[13].jumlahbiji += capturedSeeds;
-//        }
-//
-//        // Menambahkan biji di lubang terakhir (yang di seberang) ke lumbung pemain yang sedang giliran
-//        board[6 + (player == 'A' ? 1 : 7)].jumlahbiji += board[oppositeIndex].jumlahbiji;
-//
-//        // Mengosongkan lubang seberang
-//        board[oppositeIndex].jumlahbiji = 0;
-//    }
-//}
-
 int checkWinner(nodeCongklak *board) {
     int i;
     int totalBijiPlayer1 = 0, totalBijiPlayer2 = 0;
@@ -335,4 +307,5 @@ void saveScore(const char *filename, const char *winner) {
     fprintf(file, "%s\n", winner);
     fclose(file);
 }
+
 
