@@ -9,7 +9,6 @@ int main() {
     int pil;
     nodeCongklak board[14];
     char pilihan;
-    int boardInitialized = 0;
     char player1[50], player2[50];
     char *currentPlayer;
     char choice;
@@ -19,7 +18,7 @@ int main() {
     while (1) {
         system("cls");
         printf("=========================================\n");
-        printf("|           GAME CONGKLAK               |\n");
+        printf("|           CONGKLAK GLORY              |\n");
         printf("|---------------------------------------|\n");
         printf("|1. Start Game                          |\n");
         printf("|2. Show Score                          |\n");
@@ -51,10 +50,7 @@ int main() {
                 currentPlayer = player1;
                 game_over = false;
                 system("cls");
-                if (!boardInitialized) {
-                    makeBoard(board);
-                    boardInitialized = 1;
-                }
+                makeBoard(board);
 
                 while (!game_over) {
                     displayBoard(board, player1, player2);
@@ -87,7 +83,7 @@ int main() {
                             printf("\n");
                             printf("\n");
                             printf("\n");
-                            printf("YOU'LL NEVER WALK ALONE\n);
+                            printf("YOU'LL NEVER WALK ALONE\n");
                             printf("GLORY GLORY THE CHAMPHIONS!!\n");
                             saveScore("skor.txt", winnerName);
                             getchar();
@@ -127,7 +123,6 @@ int main() {
                 return 0;
 
             default:
-                // This should never happen due to the input validation
                 break;
         }
         printf("Press any key to continue...\n");
